@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { StatusBar, Text, View } from "react-native";
 
 export default function Index() {
   return (
@@ -9,7 +9,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <StatusBar barStyle={'dark-content'}/>
+      <Text>New Projects</Text>
     </View>
   );
 }
