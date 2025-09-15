@@ -38,6 +38,21 @@ app.get('/',(req,res)=>{
     res.send("API is running....");
 })
 
+
+app.get('/api/transactions/:userId',async (req,res)=>{
+    try {
+        const {userId} = req.params;
+        const transactions = await sql`
+        SELECT * FROM transactions WHERE user_id = ${userId} ORDER BY created_at DESC
+        `
+        res.status(200).json(transactions);
+        // console.log(userId)
+    } catch (error) {
+        console.log("Error getting in transcations",error);
+        res.status(500).json({message:"Internal server Error"});
+    }
+})
+
 app.post("/api/transactions",async (req,res)=>{
     // title,amt,category.user_Id
     try {
@@ -59,6 +74,25 @@ app.post("/api/transactions",async (req,res)=>{
     }
 })
 
+app.delete("/api/transactions/:id",async (req,res)=>{
+    try {
+        const {id}= req.params;
+
+        if (isNaN(parseInt(id))){
+            return res.status(400).json({message:"Invalid transaction id"});
+        }
+        const result = await sql`
+        DELETE FROM transactions WHERE id=${id} RETURNING *;
+        `
+        if(result.length === 0){
+            return res.status(404).json({message:"Transaction not found"});
+        }
+        res.status(200).json({message:"Transaction deleted successfully"});
+    } catch (error) {
+        console.log("Error in DELETE /api/transactions/:id",error);
+        res.status(500).json({message:"Internal server Error"});
+    }
+})
 
 initDB().then(()=>{
     app.listen(PORT,()=>{
