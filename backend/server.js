@@ -1,12 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { sql } from './config/db.js';
+import rateLimiter from './middleware/rateLimiter.js';
 
 dotenv.config();
 
 const app = express();
 
 //Middleware(built-in)----between req and res
+app.use(rateLimiter);
 app.use(express.json());
 
 //Custom simple middleware
@@ -37,7 +39,6 @@ async function initDB() {
 app.get('/',(req,res)=>{
     res.send("API is running....");
 })
-
 
 app.get('/api/transactions/:userId',async (req,res)=>{
     try {
@@ -90,6 +91,33 @@ app.delete("/api/transactions/:id",async (req,res)=>{
         res.status(200).json({message:"Transaction deleted successfully"});
     } catch (error) {
         console.log("Error in DELETE /api/transactions/:id",error);
+        res.status(500).json({message:"Internal server Error"});
+    }
+})
+
+app.get("/api/transactions/summary/:userId",async(req,res)=>{
+    try{
+        const {userId} = req.params;
+
+        const balanceResult = await sql`
+        SELECT COALESCE(SUM(amount),0) AS balance FROM transactions
+        WHERE user_id=${userId};
+        `
+        const incomeResult = await sql`
+        SELECT COALESCE(SUM(amount),0) AS income FROM transactions 
+        WHERE user_id=${userId} AND amount > 0;
+        `
+        const expenseResult = await sql`
+        SELECT COALESCE(SUM(amount),0) AS expense FROM transactions 
+        WHERE user_id=${userId} AND amount < 0;
+        `
+        res.status(200).json({
+            balance: balanceResult[0].balance,
+            income: incomeResult[0].income,
+            expense: expenseResult[0].expense
+        });
+    } catch (error) {
+        console.log("Error in GET /api/transactions/summary/:userId",error);
         res.status(500).json({message:"Internal server Error"});
     }
 })
