@@ -10,7 +10,6 @@ export default function RootLayout() {
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <SafeScreen>
         <Slot />
-        {/* <Stack screenOptions={{ headerShown: true }} /> */}
       </SafeScreen>
     </ClerkProvider>
   );
