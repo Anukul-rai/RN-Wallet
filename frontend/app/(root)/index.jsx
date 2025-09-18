@@ -13,7 +13,7 @@ export default function Page() {
   useEffect(()=>{
     loadData();
   },[loadData])
-  if(loading) return <PageLoader/>
+  if(true) return <PageLoader/>
   return (
     <View>
       <SignedIn>

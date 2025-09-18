@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { styles } from '@/assets/styles/auth.styles.js'
+import { styles } from '@/assets/styles/home.styles'
 import { COLORS } from '@/constants/colors'
 
 export default function PageLoader() {
