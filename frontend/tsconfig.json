@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "components/SafeScreen.jsx", "app/_layout.jsx", "app/index.jsx", "app/(auth)/sign-in.jsx", "components/PageLoader.jsx"  ]
+, "components/SafeScreen.jsx", "app/_layout.jsx", "app/index.jsx", "app/(auth)/sign-in.jsx", "components/PageLoader.jsx", "components/BalanceCard.jsx"  ]
 }
