@@ -12,15 +12,17 @@ export default function Page() {
   useEffect(()=>{
     loadData();
   },[loadData])
-  console.log("user_id",user.id)
-  console.log("transactions",transactions)
-  console.log("summary",summary)
+  //just for testing
+  // console.log("user_id",user.id)
+  // console.log("transactions",transactions)
+  // console.log("summary",summary)
   return (
     <View>
       <SignedIn>
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
         <Text>Income:{summary.income}</Text>
-        <Text>Balance:{summary.income}</Text>
+        <Text>Balance:{summary.balance}</Text>
+        <Text>Expenses:{summary.expenses}</Text>
         <SignOutButton />
       </SignedIn>
       <SignedOut>
