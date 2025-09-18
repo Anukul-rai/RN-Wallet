@@ -8,6 +8,7 @@ import SignOutButton from '@/components/SignOutButton'
 import PageLoader from '../../components/PageLoader'
 import BalanceCard from '../../components/BalanceCard'
 import TranscationItem from '../../components/TranscationItem'
+import NoTransactionsFound from '../../components/NoTranscationFound'
 
 export default function Page() {
   const { user } = useUser()
@@ -74,6 +75,7 @@ export default function Page() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <TranscationItem item={item} onDelete={handleDelete} />}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={<NoTransactionsFound/>}
       />
     </View>
   )
