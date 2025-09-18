@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 
 const API_URL =
   Platform.OS === "android"
@@ -55,6 +55,7 @@ export const useTransactions = (userId) => {
         });
         if (!response.ok) throw new Error("Failed to delete transaction");
         await loadData(); // ✅ refresh after delete
+        Alert.alert("Success", "Transaction deleted successfully");
         } catch (error) {
         console.error("Error deleting transaction:", error);
         }
