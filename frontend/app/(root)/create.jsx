@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import { styles } from '../../assets/styles/home.styles'
 
 export default function CreateScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Create</Text>
     </View>
   )
