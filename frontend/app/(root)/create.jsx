@@ -4,7 +4,7 @@ import { styles } from '../../assets/styles/home.styles'
 export default function CreateScreen() {
   return (
     <View style={styles.container}>
-      <Text>Create</Text>
+      <Text style={styles.welcomeText}>Create</Text>
     </View>
   )
 }
