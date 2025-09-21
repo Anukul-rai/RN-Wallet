@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react";
 import { Alert, Platform } from "react-native";
+import { API_URL } from "../constants/api";
 
-const API_URL =
-  Platform.OS === "android"
-    ? "http://10.0.2.2:5001/api"     // Android Emulator
-    : "http://192.168.18.3:5001/api"; // iOS simulator or physical device
+// const API_URL =
+//   Platform.OS === "android"
+//     ? "http://10.0.2.2:5001/api"     // Android Emulator
+//     : "http://192.168.18.3:5001/api"; // iOS simulator or physical device
 
 export const useTransactions = (userId) => {
     const [transactions, setTransactions] = useState([]);
